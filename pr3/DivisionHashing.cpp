@@ -1,37 +1,49 @@
 #include <iostream>
 #include <stdlib.h>
-int *arr, size;
+int *arr, size, capacity = 0;
 void setSize(){
     arr = (int*)malloc(sizeof(int)*size);
     std::cout << "Size Allocated!" << std::endl;
     return;
 }
-int linearProbe(int index){
-    int i;
+// to get linear index which is empty
+int linearProbe(int index, int data){
+    int i, k;
     for(i = 0; i < size; i++){
-        if(arr[(index+i)%size] == 0)
-            return (index+i)%size;
+        k = (index+i)%size;
+        if(arr[k] == 0){
+            capacity++;
+            break;
+        }else if(arr[k] == data){
+            break;
+        }            
     }
+    return k;
 }
 void hashingWithLinearProbe(int data){
     int index =data % size;
     if(arr[index] == 0){
+        capacity++;
         arr[index] = data;
+    }else if(arr[index] == data){
+         return;
     }else{
-        arr[linearProbe(index+1)] = data;
+        arr[linearProbe(index+1, data)] = data;
     }
 }
 
 void hashingWithLinearProbeSearch(int data){
-    int i;
+    int i, k;
     for(i = 0; i < size; i++){
-        if(arr[((data % size) + i)%size] == data)
+        k = ((data % size) + i) % size;
+        if(arr[k] == data)
             break;
     }
     if(i != size)
-        std::cout<<data << " found at index "<< ((data % size) + i)%size << std::endl;
+        std::cout<<data << " found at index "<< k << std::endl;
     else
         std::cout<<data << " element not found!"<< std::endl;
+    return;
 }
 
 int main() {
@@ -42,13 +54,12 @@ int main() {
     for(int i = 0; i < size; i++){
         arr[i] = 0;
     }
-    for(int i = 0; i < size; i++){
-        std::cout << "Enter element " << i+1 << " : ";
+    while(capacity < size){
+        std::cout << "Enter elements : ";
         std::cin >> data;
         hashingWithLinearProbe(data);
     }
-    std::cout << std::endl;
-    std::cout << std::endl;
+    std::cout << "Array element stored using hashing element are : ";
     for(int i = 0; i < size; i++){
         std::cout << " " << arr[i];
     }
