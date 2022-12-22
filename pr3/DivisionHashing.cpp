@@ -59,7 +59,7 @@ int main() {
         std::cin >> data;
         hashingWithLinearProbe(data);
     }
-    std::cout << "Array element stored using hashing element are : ";
+    std::cout << "Array element stored using hashing are : ";
     for(int i = 0; i < size; i++){
         std::cout << " " << arr[i];
     }
