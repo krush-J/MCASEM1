@@ -1,3 +1,9 @@
+-- DEREF returns the object reference of argument expr, where expr must return a REF to an object.
+-- If you do not use this function in a query, then Oracle Database returns the object ID of the 
+-- REF instead. The DEREF operator dereferences a reference value and produces the result of that
+-- dereference. For example, if r is a reference of type ref<T>, Deref(r) is an expression of type
+-- T that yields the entity referenced by r. If the reference value is null, or is dangling (that 
+-- is, the target of the reference does not exist), the result of the DEREF operator is null.
 CREATE OR REPLACE TYPE CAR_INFO AS OBJECT(
     MFG VARCHAR(20),
     MODEL VARCHAR(10),

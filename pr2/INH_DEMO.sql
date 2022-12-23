@@ -1,3 +1,16 @@
+-- Inheritance in ORDBMS
+-- Inheritance enables you to share attributes between objects such that a subclass inherits
+-- attributes from its parent class. OracleAS TopLink provides several methods to preserve
+-- inheritance relationships, and enables you to override mappings that are specified in a
+-- superclass, or to map attributes that are not mapped in the superclass. Subclasses must
+-- include the same database field (or fields) as the parent class for their primary key 
+-- (although the primary key can have different names in these two tables). As a result, 
+-- when you are mapping relationships to a subclass stored in a separate table, the subclass
+-- table must include the parent table primary key, even if the subclass primary key differs
+-- from the parent primary key. You can represent inheritance in the database in one of two ways:
+--     Multiple tables that represent the parent class and each child class
+--     A single table that comprises the parent and all child classes
+
 DROP TABLE STUDENTS_20B;
 DROP TYPE PERSON_20B FORCE;
 DROP TYPE STUDENT_20B FORCE;

@@ -1,3 +1,10 @@
+-- Abstract Data Types (ADT) -  By using abstract data types, which are user-defined types,
+-- together with various routines, you can uniquely define and use data with complex structures
+-- and perform operations on such data. When you define a column as having an abstract data type,
+-- you can conceptualize and model its data based on object-oriented concepts. In addition, by 
+-- applying object-oriented software development techniques, you can reduce the workload for 
+-- database design, UAP development, and maintenance 
+
 CREATE OR REPLACE TYPE NAME_20B AS OBJECT(
     FNAME VARCHAR(15),
     MNAME VARCHAR(15),
