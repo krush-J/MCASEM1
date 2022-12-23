@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 template<typename T>
-class Queue{
+class Output_resQueue{
     class Node{
         public:
         T data;
@@ -21,15 +21,20 @@ class Queue{
     int size(){
         return this->cnt;
     }
-    void enqueue(T data){
-        Node* n = new Node(data); 
+    void enqueue(T data, char insertFrom){
+        Node* newNode = new Node(data); 
         if(this->isEmpty()){
-            this->front = n;
-            this->back = n;
+            this->front = newNode;
+            this->back = newNode;
         }else{
-            (this->back)->next = n;
-            n->prev = this->back;
-            this->back = n;
+            if(insertFrom == 'r'){
+                (this->back)->next = newNode;
+                newNode->prev = this->back;
+                this->back = newNode;
+            }else{
+                newNode->next = front;
+                front = newNode;
+            }            
         }          
         cnt++;             
     }
@@ -40,6 +45,7 @@ class Queue{
         front = front->next;
         if(this->front != NULL)
             (this->front)->prev = NULL;
+        cout << n->data << " removed from the queue"<<endl;
         delete n; 
         cnt--;
         return true;                  
@@ -51,28 +57,31 @@ class Queue{
         Node *temp = this->front;
         string str = "Queue [";
         while(temp != NULL){
-            str = str.append(to_string(temp->data));
-            str = str.append(", ");
+            str = str.append(temp->data);
+            if(temp->next != NULL)
+                str = str.append(", ");
             temp = temp -> next;
         }
-        str = str.substr(0, str.length()-2);
         str.append("]\n");
         return str;
     } 
 };
 void utilQueue(){
 	int choice = 1;
-	Queue<int> *queue = new Queue<int>(); 
+	Output_resQueue<string> *queue = new Output_resQueue<string>(); 
 	while(choice == 1 || choice == 2 || choice == 3 ){
 		cout << "Queue Operations {1 : enqueue, 2 : dequeue, 3 : display, other : exit}\nchoice : ";
 		cin >> choice;
 		switch(choice){
-			case 1: 
-                int data;
+			case 1:{ 
+                string data;
+                char insertFrom;
                 cout << "enter element : ";
                 cin >> data;
-                queue->enqueue(data);
-                break;
+                cout << "enter place where you want to insert a element(r : back) : ";
+                cin >> insertFrom;
+                queue->enqueue(data, insertFrom);
+            }break;
 			case 2: if(!queue->dequeue())
                     cout <<"underflow!" << endl;
                     break;
