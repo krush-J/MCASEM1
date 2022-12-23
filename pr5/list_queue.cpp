@@ -52,10 +52,10 @@ class Queue{
         string str = "Queue [";
         while(temp != NULL){
             str = str.append(to_string(temp->data));
-            str = str.append(", ");
+            if(temp->next != NULL)
+                str = str.append(", ");
             temp = temp -> next;
         }
-        str = str.substr(0, str.length()-2);
         str.append("]\n");
         return str;
     } 
